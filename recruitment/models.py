@@ -26,7 +26,7 @@ class Organization(models.Model):
 
  
 class JobDescription(models.Model):
-    CHOICES =(
+    JOB_CAT_CHOICES =(
         ('HR','HR'),
         ( 'Frontend','Frontend'), 
         ('Backend', 'Backend'),
@@ -36,15 +36,15 @@ class JobDescription(models.Model):
         ('others','others'),
     )
 
-    CHOICES2 = (
+    EMLOYMENT_CHOICES = (
         ('Part time','Part-time'),
         ('Full time','Full-time'),
     )
 
-    job_category = models.CharField(max_length=30, choices=CHOICES)
+    job_category = models.CharField(max_length=30, choices=JOB_CAT_CHOICES)
     job_title = models.CharField(max_length=30)
     job_location = models.CharField(max_length=30)
-    employment_type = models.CharField(max_length=30, choices=CHOICES2)
+    employment_type = models.CharField(max_length=30, choices=EMLOYMENT_CHOICES)
     organizaton = models.CharField(max_length=40)
     mandatory_qualification = models.CharField(max_length=40)
     optional_qualification = models.CharField(max_length=40)
@@ -61,17 +61,17 @@ class JobDescription(models.Model):
         )
 
 class JobApplicant(models.Model):
-    CHOICES = (
-        ('pending','pending'),
-        ('in_progress','in_progress'),
-        ('selected', 'selected'),
-        ('rejected','rejected'),
+    STATUS_CHOICES = (
+        ('pending','Pending'),
+        ('in_progress','In_progress'),
+        ('selected', 'Selected'),
+        ('rejected','Rejected'),
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_description = models.ForeignKey(JobDescription, on_delete=models.CASCADE)
     resume = models.FileField()
     notice_period = models.IntegerField()
-    status = models.CharField(max_length=20, choices=CHOICES)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
     def __str__(self):
         return self.user
