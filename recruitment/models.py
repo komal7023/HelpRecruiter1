@@ -1,16 +1,26 @@
 from random import choices
 from secrets import choice
+from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+from .managers import CustomUserManager
 
-class User(models.Model):
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
-    email = models.EmailField()
-    contact_number = models.CharField(max_length=12)
-    organization = models.CharField(max_length=100, blank=True, default='') 
+
+        
+class User(AbstractUser):
+    username = None
+    email = models.EmailField(_('email address'), unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
 
     def __str__(self):
-        return self.first_name 
+        return self.email
+        
+ 
 
 class Organization(models.Model):
     name = models.CharField(max_length=20)
@@ -42,13 +52,13 @@ class JobDescription(models.Model):
     )
 
     job_category = models.CharField(max_length=30, choices=JOB_CAT_CHOICES)
-    job_title = models.CharField(max_length=30)
+    job_title = models.TextField()
     job_location = models.CharField(max_length=30)
     employment_type = models.CharField(max_length=30, choices=EMLOYMENT_CHOICES)
     organizaton = models.CharField(max_length=40)
     mandatory_qualification = models.CharField(max_length=40)
     optional_qualification = models.CharField(max_length=40)
-    experience = models.IntegerField()
+    experience = models.IntegerField(default=0)
     what_is_expected = models.CharField(max_length=10)
     what_we_offer = models.CharField(max_length=10)
 

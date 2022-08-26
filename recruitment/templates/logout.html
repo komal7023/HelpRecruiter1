@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    {% block head %}
+  <title>Logged out</title>
+{% endblock %}
+
+{% block body %}
+  <p>You have been logged out.  You may <a href="{% url 'logout' %}">log back in</a>.</p>
+{% endblock %}
 </body>
 </html>

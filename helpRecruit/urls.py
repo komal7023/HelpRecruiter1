@@ -20,6 +20,10 @@ from recruitment import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index, name='index'),
-    
+    path("register/", views.register, name="register"),
+    path("login/", views.login, name='login'),
+    path("logout/", views.logOut, name="logout"),
+    path("jobdescription/", views.JobDescriptionView, name='jobdescription'),
+    path("applicationForm/",views.applied_job,name='apply')
 
 ]
