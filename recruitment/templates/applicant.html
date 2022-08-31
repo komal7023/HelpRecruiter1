@@ -8,7 +8,7 @@
 </head>
 <body>
     {%block content%}
-    <form action="{%url 'apply'%}" method="POST">
+    <form action="{%url 'applicants'%}" method="POST">
     {% csrf_token %}
         <table>
             {{form.as_table}}
@@ -18,4 +18,4 @@
     </form> 
     {%endblock%}
 </body>
-</html>
+</html> 

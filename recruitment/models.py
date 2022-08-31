@@ -36,26 +36,26 @@ class Organization(models.Model):
 
  
 class JobDescription(models.Model):
-    JOB_CAT_CHOICES =(
-        ('HR','HR'),
-        ( 'Frontend','Frontend'), 
-        ('Backend', 'Backend'),
-        ('Full stack','Full stack'), 
-        ('Dev Ops','Dev Ops'), 
-        ('BDE','BDE') ,
-        ('others','others'),
-    )
+   
+    class JobCategories(models.TextChoices):
+        hr= 'hr',_('HR')
+        frontend='frontend',_('Frontend'), 
+        backend= 'backend',_('Backend'),
+        fullstack='fullstack',_('Fullstack'), 
+        devops='devops',_('DevOps'), 
+        bde='bde',_('BDE') ,
+        others='others',_('Others')
+    
+    class EmployementTypes(models.TextChoices):
+        part_time='part_time',_('Part-time'),
+        full_time='full_time',_('Full-time')
 
-    EMLOYMENT_CHOICES = (
-        ('Part time','Part-time'),
-        ('Full time','Full-time'),
-    )
 
-    job_category = models.CharField(max_length=30, choices=JOB_CAT_CHOICES)
+    job_category = models.CharField(max_length=30, choices=JobCategories.choices)
     job_title = models.TextField()
     job_location = models.CharField(max_length=30)
-    employment_type = models.CharField(max_length=30, choices=EMLOYMENT_CHOICES)
-    organizaton = models.CharField(max_length=40)
+    employment_type = models.CharField(max_length=30, choices=EmployementTypes.choices)
+    organization = models.CharField(max_length=40)
     mandatory_qualification = models.CharField(max_length=40)
     optional_qualification = models.CharField(max_length=40)
     experience = models.IntegerField(default=0)
@@ -70,18 +70,19 @@ class JobDescription(models.Model):
             ('read_item','Can read item'),
         )
 
-class JobApplicant(models.Model):
-    STATUS_CHOICES = (
-        ('pending','Pending'),
-        ('in_progress','In_progress'),
-        ('selected', 'Selected'),
-        ('rejected','Rejected'),
-    )
+class JobApplication(models.Model):
+
+    class StatusTypes(models.TextChoices):
+        pending='pending',_('Pending'),
+        in_progress='in_progress',_('In progress'),
+        selected='selected',_('Selected'),
+        rejected='rejected',_('Rejected'),
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_description = models.ForeignKey(JobDescription, on_delete=models.CASCADE)
     resume = models.FileField()
     notice_period = models.IntegerField()
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=20, choices=StatusTypes.choices)
 
-    def __str__(self):
-        return self.user
+    # def __str__(self):
+    #     return self.user 

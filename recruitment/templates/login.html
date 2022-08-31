@@ -13,10 +13,10 @@
     {%load crispy_forms_tags %}
     {% csrf_token %}
     {{ form|crispy }}
-     <br>   
-    <button type="submit">Log In</button>
-    
+    <br>
+    <button type="submit" style="cursor: pointer;">Log In</button>
+
 </form>
-<br>Don't have an account? <a href="/register" target="blank"><strong>register here</strong></a>!
+<br>Don't have an account? <a href="/register" target="blank" style="cursor: pointer;"><strong>register here</strong></a>!
 
 </html>
