@@ -35,7 +35,7 @@
   <h2>Job Description</h2>
   {% endblock %}
 
-  <table class="table">
+  <!-- <table class="table">
     <thead>
       <tr>
         <th>Job Title</th>
@@ -56,9 +56,39 @@
       {%endfor%}
     </tbody>
 
-  </table>
+  </table> -->
+  
+  <div class="row">
+    {% for jd in jds %}
+    <div class="col-md-6">
+      <span class="ml-3 mt-3">
+        <label> <b>Job Title - </b>
+          <a href="{% url 'detail' jd.id %}"><b>{{jd}}</b></a>
+        </label>
+        
+        <div>
+          <label> <b>Job Category - </b>
+            {{jd.get_job_category_display}}
+          </label>
+        </div>
 
+        <div>
+          <label> <b>Organization - </b>
+            {{jd.organization}}
+          </label>
+        </div>
 
+        <div>
+          <label> <b>Employment-type - </b>
+            {{jd.get_employment_type_display}}
+            <a href="{% url 'detail' jd.id %}"></a>
+          </label>
+        </div>
+        <br />
+      </span>
+    </div>
+    {%endfor%}
+  </div>
   {% endblock %}
 
 
