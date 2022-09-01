@@ -1,7 +1,8 @@
 from django import forms
 from .models import JobApplication, JobDescription, User
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm   
+
 
 
 class AuthenticationFormWithInactiveUsersOkay(AuthenticationForm):
@@ -9,26 +10,23 @@ class AuthenticationFormWithInactiveUsersOkay(AuthenticationForm):
         pass
 
 
-class UserForm (UserCreationForm):
-    username = forms.CharField(label="Username")
-
+class UserForm (UserCreationForm): 
+    username = forms.CharField(label = "Username")
     class Meta:
         model = User
-        fields = ('email', 'username')
-
+        fields = ('email','username')
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ("email",)
+        fields = ( "email",)        
 
 
 class ApplicationForm(forms.ModelForm):
     contact_number = forms.CharField(max_length=12)
     resume = forms.FileField(required=False)
     notice_period = forms.IntegerField()
-
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
@@ -41,11 +39,15 @@ class ApplicationForm(forms.ModelForm):
         except User.DoesNotExist:
             return email
 
-        raise forms.ValidationError('This email address is already in use.')
-
-
+        raise forms.ValidationError('This email address is already in use.')    
+    
 class ApplicantForm(forms.ModelForm):
-    resume = forms.FileField(required=False)
+    def __init__(self, **kwargs):
+        self.base_fields['user'].initial = kwargs.pop('user', None)
+        super(ApplicantForm, self).__init__(**kwargs)
+
+ 
+    resume = forms.FileField(required=False)    
 
     class Meta:
         model = JobApplication
@@ -59,11 +61,9 @@ class ApplicantForm(forms.ModelForm):
         except User.DoesNotExist:
             return email
 
-        raise forms.ValidationError('This email address is already in use.')
-
+        raise forms.ValidationError('This email address is already in use.')    
 
 class JobDescriptionForm(forms.ModelForm):
     class Meta:
         model = JobDescription
-        fields = ('job_title', 'job_category',
-                  'employment_type', 'organization')
+        fields = ('job_title','job_category','employment_type','organization')
