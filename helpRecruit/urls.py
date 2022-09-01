@@ -19,11 +19,12 @@ from recruitment import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index, name='index'),
+    path('',views.job_description_view, name='jobdescription'),
     path("register/", views.register, name="register"),
     path("login/", views.login, name='login'),
-    path("logout/", views.logOut, name="logout"),
-    path("jobdescription/", views.JobDescriptionView, name='jobdescription'),
-    path("applicationForm/",views.applied_job,name='apply')
+    path("logout/", views.log_out, name="logout"),
+    path("detail/<str:pk>",views.detail_view,name="detail"),
+    path("detail/application_form/",views.applied_job,name='apply'),
+    path("detail/application_form/applicants/",views.application_view, name='applicants')
 
 ]

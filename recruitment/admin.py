@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import JobDescription, JobApplicant, Organization
+from .models import JobApplication, JobDescription, JobApplication, Organization
 from .forms import UserForm, CustomUserChangeForm
 from .models import User
 
@@ -27,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(JobDescription)
-admin.site.register(JobApplicant)
+admin.site.register(JobApplication)
 admin.site.register(Organization)
 
 
