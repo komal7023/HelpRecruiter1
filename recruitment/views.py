@@ -49,20 +49,20 @@ def login(request):
     form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def logOut(request):
+def log_out(request):
     messages.success(request,"logged out successfully")
     logout(request)
     
     return redirect('/')
 
-def detailView(request):
-    jobDescription=JobDescription.objects.all()
+def detail_view(request,pk):
+    jobDescription=JobDescription.objects.filter(id=pk)
     context = {"jds":jobDescription}
-    return render(request, 'detail.html', context)    
+    return render(request, 'jd.html', context)    
 
-def JobDescriptionView(request):
-    # pdb.set_trace()
+def job_description_view(request):
     jobDescription = JobDescription.objects.all()
+
     context = {"jds":jobDescription}
     return render(request, 'index.html', context)
     
@@ -70,7 +70,8 @@ def JobDescriptionView(request):
 def applied_job(request):
     
     if request.method == 'POST':
-        form = ApplicationForm(request.POST)
+        pdb.set_trace()
+        form = ApplicationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('applicants/')
@@ -82,7 +83,9 @@ def applied_job(request):
 def application_view(request):
 
     if request.method == 'POST':
-        form = ApplicantForm(data=request.POST)
+        pdb.set_trace()
+
+        form = ApplicantForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')

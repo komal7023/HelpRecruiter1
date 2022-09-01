@@ -25,7 +25,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 class ApplicationForm(forms.ModelForm):
     contact_number = forms.CharField(max_length=12)
-    # resume = forms.FileField()
+    resume = forms.FileField(required=False)
     notice_period = forms.IntegerField()
     class Meta:
         model = User
@@ -48,13 +48,8 @@ class ApplicantForm(forms.ModelForm):
         # self.base_fields['job_description'] = kwargs.pop('job_description', None)
         super(ApplicantForm, self).__init__(**kwargs)
 
-    def save(self, commit=True):
-        obj = super(ApplicantForm, self).save(commit=False)
-        obj.user = self.user
-        obj.job_description = self.job_description
-        if commit:
-            obj.save()
-        return obj
+ 
+    resume = forms.FileField(required=False)    
 
     class Meta:
         model = JobApplication

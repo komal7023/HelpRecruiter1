@@ -1,5 +1,7 @@
+import pdb
 from random import choices
 from secrets import choice
+from typing_extensions import Required
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -71,7 +73,7 @@ class JobDescription(models.Model):
         )
 
 class JobApplication(models.Model):
-
+    
     class StatusTypes(models.TextChoices):
         pending='pending',_('Pending'),
         in_progress='in_progress',_('In progress'),
@@ -80,7 +82,7 @@ class JobApplication(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_description = models.ForeignKey(JobDescription, on_delete=models.CASCADE)
-    resume = models.FileField()
+    resume = models.FileField(upload_to=None) 
     notice_period = models.IntegerField()
     status = models.CharField(max_length=20, choices=StatusTypes.choices)
 

@@ -31,15 +31,33 @@
 
   {% endif %}
 
-  {% for jd in jds %}
+  {% block title %}
+  <h2>Job Description</h2>
+  {% endblock %}
 
-  <ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Job Title</th>
+        <th>Job Category</th>
+        <th>Job Organization</th>
+        <th>Job Employment-type</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for jd in jds %}
+      <tr>
+        <td>{{jd}}</td>
+        <td>{{jd.get_job_category_display}}</td>
+        <td>{{jd.organization}}</td>
+        <td>{{jd.get_employment_type_display}}</td>
+        <td><a href="{% url 'detail' jd.id %}"><button type="submit" style="cursor: pointer;">View Detail</button></a></td>
+      </tr>
+      {%endfor%}
+    </tbody>
 
-    <li><a href="{% url 'detail'%}"><button type="submit">{{jd}}</button></a></li>
-  
-  </ul>
+  </table>
 
-  {%endfor%}
 
   {% endblock %}
 
