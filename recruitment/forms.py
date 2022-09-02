@@ -1,8 +1,9 @@
+import pdb
 from django import forms
 from .models import JobApplication, JobDescription, User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm   
-
+import pdb
 
 
 class AuthenticationFormWithInactiveUsersOkay(AuthenticationForm):
@@ -43,9 +44,12 @@ class ApplicationForm(forms.ModelForm):
     
 class ApplicantForm(forms.ModelForm):
     def __init__(self, **kwargs):
+        # pdb.set_trace()
         self.base_fields['user'].initial = kwargs.pop('user', None)
-        super(ApplicantForm, self).__init__(**kwargs)
+        # self.base_fields['job_description'].initial = kwargs.pop('job_description', None)
 
+        super(ApplicantForm, self).__init__(**kwargs)
+    
  
     resume = forms.FileField(required=False)    
 

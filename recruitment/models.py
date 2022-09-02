@@ -87,5 +87,4 @@ class JobApplication(models.Model):
     notice_period = models.IntegerField()
     status = models.CharField(max_length=20, choices=StatusTypes.choices)
 
-    # def __str__(self):
-    #     return self.user 
+    
