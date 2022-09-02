@@ -15,7 +15,7 @@ def index(request):
 
 
 def register(request):  
-    # pdb.set_trace()
+   
     if request.method == 'POST':  
         form = UserForm(request.POST)  
         if form.is_valid():  
@@ -62,7 +62,6 @@ def detail_view(request,pk):
 
 def job_description_view(request):
     jobDescription = JobDescription.objects.all()
-
     context = {"jds":jobDescription}
     return render(request, 'index.html', context)
     
@@ -70,7 +69,6 @@ def job_description_view(request):
 def applied_job(request):
     
     if request.method == 'POST':
-        pdb.set_trace()
         form = ApplicationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -83,8 +81,6 @@ def applied_job(request):
 def application_view(request):
 
     if request.method == 'POST':
-        pdb.set_trace()
-
         form = ApplicantForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
