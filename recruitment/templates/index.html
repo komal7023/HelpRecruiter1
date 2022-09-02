@@ -1,3 +1,4 @@
+<!-- {% load static %} -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <!-- <link rel="stylesheet" href="{% static 'recruitment/style.css' %}"> -->
 </head>
 
 <body>
@@ -63,27 +65,36 @@
     <div class="col-md-6">
       <span class="ml-3 mt-3">
         <label> <b>Job Title - </b>
-          <a href="{% url 'detail' jd.id %}"><b>{{jd}}</b></a>
+          {{jd}}
         </label>
-        
-        <div>
+       
+        <!-- <div>
           <label> <b>Job Category - </b>
             {{jd.get_job_category_display}}
           </label>
-        </div>
+        </div> -->
 
         <div>
           <label> <b>Organization - </b>
             {{jd.organization}}
           </label>
         </div>
+        <div>
+          <label>
+            <b>Job Location - </b>
+            {{jd.job_location}}
+          </label>
+        </div>
 
         <div>
           <label> <b>Employment-type - </b>
             {{jd.get_employment_type_display}}
-            <a href="{% url 'detail' jd.id %}"></a>
           </label>
-        </div>
+          </div>
+         
+          <a href="{% url 'detail' jd.id %}"><button type="submit" style="cursor: pointer;">View Detail</button></a><br>
+        
+        
         <br />
       </span>
     </div>
