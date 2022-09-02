@@ -52,7 +52,9 @@ class JobDescription(models.Model):
         part_time='part_time',_('Part-time'),
         full_time='full_time',_('Full-time')
 
-
+    job_brief = models.TextField(blank=True)
+    responsibilities = models.TextField(blank=True)
+    skills = models.TextField(blank=True)
     job_category = models.CharField(max_length=30, choices=JobCategories.choices)
     job_title = models.TextField()
     job_location = models.CharField(max_length=30)
@@ -61,8 +63,7 @@ class JobDescription(models.Model):
     mandatory_qualification = models.CharField(max_length=40)
     optional_qualification = models.CharField(max_length=40)
     experience = models.IntegerField(default=0)
-    what_is_expected = models.CharField(max_length=10)
-    what_we_offer = models.CharField(max_length=10)
+    
 
     def __str__(self):
         return self.job_title 
