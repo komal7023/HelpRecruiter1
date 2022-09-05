@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from recruitment import views 
+app_name = 'recruitment'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +25,7 @@ urlpatterns = [
     path("login/", views.login, name='login'),
     path("logout/", views.log_out, name="logout"),
     path("detail/<str:pk>",views.detail_view,name="detail"),
-    path("detail/application_form/<str:pk>",views.applied_job,name='apply'),
+    path("detail/application_form/<str:pk>",views.application_view,name='apply'),
+    # path("app/<str:pk>",views.app_view,name='app'),
 
 ]

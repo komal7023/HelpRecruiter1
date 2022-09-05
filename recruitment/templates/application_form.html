@@ -10,9 +10,10 @@
 </head>
 <body>
     {%block content%}
-    <form action="{%url 'apply' %}" method="POST" enctype="multipart/form-data">
+    <form  method="POST" enctype="multipart/form-data">
     {% csrf_token %}
         <table>
+            {{form.job_description}}
             {{form.as_table}}
         </table>
         <br>
