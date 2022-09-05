@@ -1,3 +1,4 @@
+from multiprocessing import context
 import pdb
 from django.shortcuts import render, redirect
 from .forms import ApplicationForm, UserForm, ApplicantForm, JobDescriptionForm
@@ -58,7 +59,7 @@ def log_out(request):
 def detail_view(request,pk):
     jobDescription=JobDescription.objects.filter(id=pk)
     context = {"jds":jobDescription}
-    return render(request, 'jd.html', context)    
+    return render(request, 'job_description.html', context)    
 
 def job_description_view(request):
     jobDescription = JobDescription.objects.all()
@@ -66,26 +67,29 @@ def job_description_view(request):
     return render(request, 'index.html', context)
     
 
-def applied_job(request):
+# def applied_job(request):
     
-    if request.method == 'POST':
-        form = ApplicationForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('applicants/')
-    else:
-        form = ApplicationForm()
-    context = {'form':form}
-    return render(request,'form.html',context)    
+#     if request.method == 'POST':
+#         form = ApplicantForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             # pdb.set_trace()
+#             form.save()
+#             return redirect('/')
+#     else:
+#         form = ApplicantForm(user=request.user)
+#     context = {'form':form}
+#     return render(request,'form.html',context)    
 
-def application_view(request):
-
+def application_view(request,pk):
+    
     if request.method == 'POST':
         form = ApplicantForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')
     else:
-        form = ApplicantForm(user=request.user)
-    context = {'form':form}
-    return render(request,'applicant.html',context)
+        form=ApplicantForm(user=request.user, job_description = pk)
+    context={'form':form}
+    return render(request,'application_form.html',context)             
+
+

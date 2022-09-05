@@ -4,7 +4,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm   
 
 
-
 class AuthenticationFormWithInactiveUsersOkay(AuthenticationForm):
     def confirm_login_allowed(self, user):
         pass
@@ -43,27 +42,25 @@ class ApplicationForm(forms.ModelForm):
     
 class ApplicantForm(forms.ModelForm):
     def __init__(self, **kwargs):
-        self.base_fields['user'].initial = kwargs.pop('user', None)
-        super(ApplicantForm, self).__init__(**kwargs)
 
+        self.base_fields['user'].initial = kwargs.pop('user', None)
+        self.base_fields['job_description'].initial = kwargs.pop('job_description', None)
+        super(ApplicantForm, self).__init__(**kwargs)
+        print(self.fields)
  
     resume = forms.FileField(required=False)    
 
     class Meta:
         model = JobApplication
+        widgets = {
+            "user": forms.HiddenInput(),
+            "job_description": forms.HiddenInput(),
+            "status": forms.HiddenInput(),
+        }
         fields = "__all__"
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-
-        try:
-            JobApplication.objects.get(email=email)
-        except User.DoesNotExist:
-            return email
-
-        raise forms.ValidationError('This email address is already in use.')    
+   
 
 class JobDescriptionForm(forms.ModelForm):
     class Meta:
         model = JobDescription
-        fields = ('job_title','job_category','employment_type','organization')
+        fields = ('job_title','job_category','employment_type','organization') 

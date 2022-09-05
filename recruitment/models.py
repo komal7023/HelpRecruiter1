@@ -75,7 +75,7 @@ class JobDescription(models.Model):
 
 class JobApplication(models.Model):
     
-    class StatusTypes(models.TextChoices):
+    class StatusType(models.TextChoices):
         pending='pending',_('Pending'),
         in_progress='in_progress',_('In progress'),
         selected='selected',_('Selected'),
@@ -85,7 +85,5 @@ class JobApplication(models.Model):
     job_description = models.ForeignKey(JobDescription, on_delete=models.CASCADE)
     resume = models.FileField(upload_to=None) 
     notice_period = models.IntegerField()
-    status = models.CharField(max_length=20, choices=StatusTypes.choices)
+    status = models.CharField(max_length=20, choices=StatusType.choices, default=StatusType.pending)
 
-    # def __str__(self):
-    #     return self.user 

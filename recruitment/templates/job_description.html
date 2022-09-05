@@ -57,11 +57,13 @@
 
         </span>
     </div>
+    <a href="{% url 'apply' jd.id %}"><button type="submit" style="cursor: pointer;">
+        <h4>Apply for job</h4>
+    </button>
+    </a> 
     {%endfor%}
 
-    <a href="{% url 'apply' %}"><button type="submit" style="cursor: pointer;">
-            <h4>Apply for job</h4>
-        </button></a>
+    
     </p>
 
     {%endblock%}
