@@ -83,7 +83,7 @@ class JobApplication(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_description = models.ForeignKey(JobDescription, on_delete=models.CASCADE)
-    resume = models.FileField(upload_to=None) 
+    resume = models.FileField(upload_to='Documents/') 
     notice_period = models.IntegerField()
     status = models.CharField(max_length=20, choices=StatusType.choices, default=StatusType.pending)
 

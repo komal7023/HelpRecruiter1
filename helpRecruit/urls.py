@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from recruitment import views 
-app_name = 'recruitment'
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +28,9 @@ urlpatterns = [
     path("logout/", views.log_out, name="logout"),
     path("detail/<str:pk>",views.detail_view,name="detail"),
     path("detail/application_form/<str:pk>",views.application_view,name='apply'),
-    # path("app/<str:pk>",views.app_view,name='app'),
+    path("applied-jobs/",views.applied_job,name='applied'), 
+    
 
-]
+] 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -21,37 +21,36 @@
     <div class="col-md-6">
         <span class="ml-3 mt-3">
             <div>
-                <label> <b>Job Brief - </b><br>
+                <label> <b>Job Brief - </b></label><br>
                     {{jd.job_brief}}
-                </label>
+                
             </div>
             <br>
 
             <div>
-                <label> <b>Responsibilities - </b><br>
-                        {{jd.responsibilities}}
+                <label> <b>Responsibilities - </b></label><br>
+                        {{jd.responsibilities | linebreaks}}
                     
-                </label>
+                
             </div>
             <br/>
 
             <div>
-                <label> <b>Requirements and Skills - </b><br>
+                <label> <b>Requirements and Skills - </b></label><br>
                     
-                        {{jd.skills}}
+                        {{jd.skills | linebreaks}} 
                     
-                </label>
             </div>
             <br/>
 
             <div>
-                <label> <b> Educational-qualifications - </b>
+                <label> <b> Educational-qualifications - </b></label>
                     <ul>
                         <li>{{jd.mandatory_qualification}} (Required)</li>
                         <li>{{jd.optional_qualification}}</li>
 
                     </ul>
-                </label>
+                
             </div>
 
 
@@ -63,12 +62,8 @@
     </a> 
     {%endfor%}
 
-    
-    </p>
-
     {%endblock%}
 
-    </form>
 </body>
 
 </html>

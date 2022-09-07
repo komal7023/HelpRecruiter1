@@ -48,7 +48,7 @@ class ApplicantForm(forms.ModelForm):
         super(ApplicantForm, self).__init__(**kwargs)
         print(self.fields)
  
-    resume = forms.FileField(required=False)    
+    resume = forms.FileField()    
 
     class Meta:
         model = JobApplication
