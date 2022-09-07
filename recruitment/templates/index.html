@@ -27,6 +27,7 @@
   Hi {{ user }}!
   <h4>You're successfully logged in.</h4>
   <a href="{% url 'logout' %}"><button type="submit" style="cursor: pointer;">Logout</button></a>
+  <a href="{% url 'applied' %}"><button type="submit" style="cursor: pointer;">Applied Job</button></a>
   {% else %}
   <a href="{% url 'register' %}"><button type="submit" style="cursor: pointer;">Register</button></a>
   <a href="{% url 'login' %}"><button type="submit" style="cursor: pointer;">Login</button></a>

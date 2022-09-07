@@ -67,18 +67,11 @@ def job_description_view(request):
     return render(request, 'index.html', context)
     
 
-# def applied_job(request):
-    
-#     if request.method == 'POST':
-#         form = ApplicantForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             # pdb.set_trace()
-#             form.save()
-#             return redirect('/')
-#     else:
-#         form = ApplicantForm(user=request.user)
-#     context = {'form':form}
-#     return render(request,'form.html',context)    
+def applied_job(request):
+    appliedJob = JobApplication.objects.all()
+    context={"jobs":appliedJob}
+    return render(request,'applied_job.html',context)
+        
 
 def application_view(request,pk):
     
@@ -90,6 +83,9 @@ def application_view(request,pk):
     else:
         form=ApplicantForm(user=request.user, job_description = pk)
     context={'form':form}
-    return render(request,'application_form.html',context)             
+    return render(request,'application_form.html',context)     
+
+
+             
 
 
