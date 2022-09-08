@@ -7,4 +7,4 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('', include('recruitment.urls')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
