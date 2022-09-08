@@ -21,7 +21,6 @@ def register(request):
         form = UserForm(request.POST)  
         if form.is_valid():  
             form.save() 
-            messages.success(request, "your account has been created successfully")
             return redirect('/')
    
     else:  
@@ -50,11 +49,8 @@ def login(request):
     form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def log_out(request):
-    messages.success(request,"logged out successfully")
-    logout(request)
-    
-    return redirect('/')
+def log_out(request):  
+    return render(request,'logout.html') 
 
 def detail_view(request,pk):
     jobDescription=JobDescription.objects.filter(id=pk)

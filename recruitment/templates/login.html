@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'recruitment/style.css' %}">
 </head>
 
 <h2>Log In</h2>
@@ -14,9 +17,17 @@
     {% csrf_token %}
     {{ form|crispy }}
     <br>
-    <button type="submit" style="cursor: pointer;">Log In</button>
+    <button type="submit" style="cursor: pointer;" class="login">Log In</button>
 
 </form>
 <br>Don't have an account? <a href="/register" target="blank" style="cursor: pointer;"><strong>register here</strong></a>!
 
 </html>
+<script>
+    $(document).ready(function(){
+        $(".login").click( function() {
+            window.alert("You're succesfully logged in!");
+    });
+  
+    });
+  </script>
