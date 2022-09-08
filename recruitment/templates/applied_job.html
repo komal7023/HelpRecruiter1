@@ -14,38 +14,38 @@
     {%block title%}
     <h2>Job Application</h2>
     {%endblock%}
-    {%block content%}
-       {% for job in jobs %}
-        <div class="col-md-6">
-            <span class="ml-3 mt-3">
-                        <div>
-                            <label><b>User :</b></label>
-                            {{job.user}}
-                        </div>  
-
-                        <div>
-                            <label><b>Job Description :</b></label>
-                            {{job.job_description}}
-                        </div>  
-
-                        <div>
-                            <label><b>Resume :</b></label>
-                            <a href="{{job.resume.url}}" download>Download</a>
-                        </div>   
-
-                        <div>
-                            <label><b>Notice-period :</b></label>
-                            {{job.notice_period}}
-                        </div>
-
-                        <div>
-                            <label><b>Status :</b></label>
-                            {{job.get_status_display}}
-                        </div>
-                        <br>
-            </span>
-        </div>
+    
+    {% block content %}
+    <table style="border: 1px solid black;">
+        <tr>
+            <th style="border: 1px solid black;">
+                <b>User</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Job Description</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Resume</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Notice-period</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Status</b>
+            </th>
+        </tr>
+        {% for job in jobs %}
+        <tr>
+            <td style="border: 1px solid black;">{{job.user}}</td>
+            <td style="border: 1px solid black;">{{job.job_description}}</td>
+            <td style="border: 1px solid black;"><a href="{{job.resume.url}}" download>Download</a></td>
+            <td style="border: 1px solid black; text-align: center;">{{job.notice_period}}</td>
+            <td style="border: 1px solid black;">{{job.get_status_display}}</td>
+        </tr>
         {%endfor%}
-    {%endblock%}
+    </table>
+    {% endblock %}
+
 </body>
+
 </html>

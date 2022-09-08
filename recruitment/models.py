@@ -1,4 +1,3 @@
-import pdb
 from random import choices
 from secrets import choice
 from typing_extensions import Required
@@ -7,7 +6,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
-
 
         
 class User(AbstractUser):
@@ -23,7 +21,6 @@ class User(AbstractUser):
         return self.email
         
  
-
 class Organization(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=40)
