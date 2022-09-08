@@ -11,10 +11,7 @@
 </head>
 <body>
     {% block content %} 
-
-         
-
-<div class="container py-5">
+	<div class="container py-5">
 	<h1>Register</h1>
 	<form method="POST" action="{% url 'register' %}">
         {%load crispy_forms_tags %}
@@ -25,10 +22,8 @@
          <br>               
 		<button class="register" type="submit" style="cursor: pointer;">Register</button> 
 	</form>
-	
-</div>
-
-{% endblock %}
+        </div>
+   {% endblock %}
 </body>
 </html>
 <script>
@@ -38,4 +33,4 @@
     });
   
     });
-  </script>
+</script>
