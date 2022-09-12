@@ -6,7 +6,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
-
         
 class User(AbstractUser):
     username = None
@@ -18,7 +17,7 @@ class User(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.email 
         
  
 class Organization(models.Model):
@@ -83,4 +82,8 @@ class JobApplication(models.Model):
     resume = models.FileField(upload_to='Documents/') 
     notice_period = models.IntegerField()
     status = models.CharField(max_length=20, choices=StatusType.choices, default=StatusType.pending)
+
+  
+
+
 
