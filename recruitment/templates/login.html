@@ -7,20 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            font-size: 15px;
+        }
+        h2{
+            font-size: 30px;
+            text-decoration: underline;
+            text-align: center;
+        }
+        p{
+            text-align: center;
+        }
+    </style>
     
 </head>
-<body style="background: cadetblue;">
-<h2>Log In</h2>
-<form method="post">
+<body>
+<h2>Login </h2>
+<form method="post" style="margin-left: 40vw; ">
     {%load crispy_forms_tags %}
     {% csrf_token %}
     {{ form|crispy }}
     <br>
-    <button type="submit" style="cursor: pointer;" class="login">Log In</button>
+    <button type="submit" style="cursor: pointer; padding: 4px;" class="login">Login</button>
 
 </form>
-<br>Don't have an account? <a href="/register" target="blank" style="cursor: pointer;"><strong>register
-        here</strong></a>!
+<br>
+<p>Don't have an account? <a href="/register" target="blank" style="cursor: pointer;"><strong>register
+        here</strong></a>!</p>
     
 </body>
 </html>

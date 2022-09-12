@@ -6,10 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        label{
+            font-size: 20px;
+        }
+    </style>
    
 </head>
 
-<body style="background: cadetblue;">
+<body >
     {%block title%}
     <h1 style="text-decoration: underline; color: rgb(8, 3, 54);">Job Description</h1>
     {%endblock%}
@@ -42,7 +47,7 @@
             </div>
         </span>
     </div>
-    <a href="{% url 'apply' jd.id %}"><button type="submit" style="cursor: pointer; background: rgb(182, 223, 233);">
+    <a href="{% url 'apply' jd.id %}"><button type="submit" style="cursor: pointer; background: rgb(10, 32, 90); color: white;">
             <h4>Apply for job</h4>
         </button>
     </a>

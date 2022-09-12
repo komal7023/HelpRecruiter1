@@ -7,17 +7,17 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<body style="background: cadetblue;">
-    <h2 style="text-align: center; color: rgb(56, 26, 5); text-decoration: underline; padding-bottom: 25px;">Application Form</h2>
+<body>
+    <h2 style="text-align: center; color: rgb(4, 27, 90); text-decoration: underline; padding-bottom: 25px;">Application Form</h2>
     {%block content%}
-    <form  method="POST" enctype="multipart/form-data" style="margin-left: 37vw; width: 50vw; text-align: justify;">
+    <form  method="POST" enctype="multipart/form-data" style="margin-left: 37vw; width: 70vw; text-align: justify;">
     {% csrf_token %}
         <table>
             {{form.job_description}}
             {{form.as_table}}
         </table>
         <br>
-        <input type="submit" value="Apply" class="apply" style="cursor: pointer; background: rgb(229, 235, 236); margin-left: 100px; padding: 5px;"></a>
+        <input type="submit" value="Apply" class="apply" style="cursor: pointer; background: rgb(8, 31, 92); color: white; margin-left: 100px; padding: 8px;"></a>
     </form> 
     {%endblock%}
 </body>
