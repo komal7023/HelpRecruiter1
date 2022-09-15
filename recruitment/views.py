@@ -71,9 +71,4 @@ def application_view(request,pk):
     else:
         form=ApplicantForm(user=request.user, job_description = pk)
     context={'form':form}
-    return render(request,'application_form.html',context)     
-
-
-             
-
-
+    return render(request,'application_form.html',context)       

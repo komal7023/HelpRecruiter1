@@ -24,7 +24,7 @@
 </head>
 <body>
 <h2>Login </h2>
-<form method="post" style="margin-left: 40vw; ">
+<form method="post" style="margin-left: 40vw; line-height: 25px; ">
     {%load crispy_forms_tags %}
     {% csrf_token %}
     {{ form|crispy }}
@@ -32,7 +32,7 @@
     <button type="submit" style="cursor: pointer; padding: 4px;" class="login">Login</button>
 
 </form>
-<br>
+
 <p>Don't have an account? <a href="/register" target="blank" style="cursor: pointer;"><strong>register
         here</strong></a>!</p>
     

@@ -10,7 +10,7 @@
 <body>
     <h2 style="text-align: center; color: rgb(4, 27, 90); text-decoration: underline; padding-bottom: 25px;">Application Form</h2>
     {%block content%}
-    <form  method="POST" enctype="multipart/form-data" style="margin-left: 37vw; width: 70vw; text-align: justify;">
+    <form  method="POST" enctype="multipart/form-data" style="margin-left: 37vw; width: 70vw; text-align: justify; line-height: 30px;">
     {% csrf_token %}
         <table>
             {{form.job_description}}
