@@ -1,38 +1,115 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    
+    .image{
+      width: 40%;
+      margin-left: 40px;
+      margin-right: 80px;
+      padding: 10px;
+      float: right;
+    }
+   
+  </style>
+
 </head>
+
 <body>
+
   {% for message in messages %}
   <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
     <strong>Message:</strong> {{message}}
-    <button type="submit" class="close" data-dismiss ="alert" aria-label="Close">
-    <span aria-hidden="true">&times; </span>
+    <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times; </span>
     </button>
   </div>
   {% endfor %}
-    <h1>Recruitment Process</h1>
-    {% block content %}
-    {% if user.is_authenticated %}
-    Hi {{ user }}!
-    <h4>You're successfully logged in.</h4>
-    <a href="{% url 'logout' %}"><button type="submit">LogOut</button></a>
-    {% else %}
-    <a href="{% url 'register' %}"><button type="submit">Register</button></a>
-    <a href="{% url 'login' %}"><button type="submit">LogIn</button></a>
+  <h1 style="color: rgb(4, 27, 90); font-size: 50px;">Recruitment Process</h1>
+  <div class="container">
+    <div class="image"><img src="{% static 'images/recruitment.jpeg' %}" alt="Recruitment image" width="500" /></div>
+    <div class="image"><img src="{% static 'images/image.jpg' %}" alt="image" width="500" /></div>
+  </div>
+  <br>
+  {% block content %}
+  {% if user.is_authenticated %}
+  <p style="font-size: 20px;">Hi {{ user }}!</p>
+  <h4 style="font-size: 20px;">You're successfully logged in.</h4>
+  <a href="{% url 'logout' %}"><button type="submit"
+      style="cursor: pointer; background: rgb(4, 27, 90); color: white; padding: 7px; margin: 10px; "
+      class="logout">Logout</button></a>
+  <a href="{% url 'applied' %}"><button type="submit"
+      style="cursor: pointer; background: rgb(4, 27, 90); color: white; padding: 7px; ">Applied Job</button></a>
+  {% else %}
+  <a href="{% url 'register' %}"><button type="submit"
+      style="cursor: pointer; background: rgb(4, 27, 90); color: white; padding: 7px; margin: 10px; ">Register</button></a>
+  <a href="{% url 'login' %}"><button type="submit"
+      style="cursor: pointer; background: rgb(4, 27, 90); color: white; padding: 7px; ">Login</button></a>
 
-    {% endif %}
+  {% endif %}
 
-    {% endblock %}
+  {% block title %}
+  <h2 style="color: rgb(4, 27, 90); font-size: 40px;">Job Description</h2>
+  {% endblock %}
 
-    <a href="{% url 'jobdescription' %}"><button type="submit">Job Description</button></a>
-    
-    
+  <div class="row" style="font-size: 17px;">
+    {% for jd in jds %}
+    <div class="col-md-6">
+      <span class="ml-3 mt-3">
+        <label> <b>Job Title - </b>
+          {{jd}}
+        </label>
+
+        <div>
+          <label> <b>Organization - </b>
+            {{jd.organization}}
+          </label>
+        </div>
+        <div>
+          <label>
+            <b>Job Location - </b>
+            {{jd.job_location}}
+          </label>
+        </div>
+
+        <div>
+          <label> <b>Employment-type - </b>
+            {{jd.get_employment_type_display}}
+          </label>
+        </div>
+
+        <a href="{% url 'detail' jd.id %}"><button type="submit"
+            style="cursor: pointer; background: rgb(4, 27, 90); color: white; margin-top: 10px; padding: 5px;">View
+            Detail</button>
+        </a>
+        <br>
+
+        <br />
+      </span>
+    </div>
+    {%endfor%}
+  </div>
+  {% endblock %}
+
+
 </body>
+
 </html>
+<script>
+  $(document).ready(function () {
+    $(".logout").click(function () {
+      window.alert("You're succesfully logged out!");
+    });
 
-
+  });
+</script>

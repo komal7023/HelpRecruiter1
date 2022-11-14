@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body >
+    {%block title%}
+    <h2 style="color: rgb(6, 10, 10); margin: 20px; text-decoration: underline; padding-bottom: 15px;">Job Application</h2>
+    {%endblock%}
+    
+    {% block content %}
+    <table style="border: 1px solid black; margin: 20px;">
+        <tr>
+            <th style="border: 1px solid black;">
+                <b>User</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Job Description</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Resume</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Notice-period</b>
+            </th>
+            <th style="border: 1px solid black;">
+                <b>Status</b>
+            </th>
+        </tr>
+        {% for job in jobs %}
+        <tr>
+            <td style="border: 1px solid black;">{{job.user}}</td>
+            <td style="border: 1px solid black;">{{job.job_description}}</td>
+            <td style="border: 1px solid black;"><a href="{{job.resume.url}}" download>Download</a></td>
+            <td style="border: 1px solid black; text-align: center;">{{job.notice_period}}</td>
+            <td style="border: 1px solid black;">{{job.get_status_display}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    {% endblock %}
+
+</body>
+
+</html>

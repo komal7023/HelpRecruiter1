@@ -1,12 +1,11 @@
 from random import choices
 from secrets import choice
+from typing_extensions import Required
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
-
-
         
 class User(AbstractUser):
     username = None
@@ -18,12 +17,11 @@ class User(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.email 
         
  
-
 class Organization(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=40)
     country = models.CharField(max_length=30)
     address = models.CharField(max_length=50)
@@ -36,31 +34,32 @@ class Organization(models.Model):
 
  
 class JobDescription(models.Model):
-    JOB_CAT_CHOICES =(
-        ('HR','HR'),
-        ( 'Frontend','Frontend'), 
-        ('Backend', 'Backend'),
-        ('Full stack','Full stack'), 
-        ('Dev Ops','Dev Ops'), 
-        ('BDE','BDE') ,
-        ('others','others'),
-    )
+   
+    class JobCategories(models.TextChoices):
+        hr= 'hr',_('HR')
+        frontend='frontend',_('Frontend'), 
+        backend= 'backend',_('Backend'),
+        fullstack='fullstack',_('Fullstack'), 
+        devops='devops',_('DevOps'), 
+        bde='bde',_('BDE') ,
+        others='others',_('Others')
+    
+    class EmployementTypes(models.TextChoices):
+        part_time='part_time',_('Part-time'),
+        full_time='full_time',_('Full-time')
 
-    EMLOYMENT_CHOICES = (
-        ('Part time','Part-time'),
-        ('Full time','Full-time'),
-    )
-
-    job_category = models.CharField(max_length=30, choices=JOB_CAT_CHOICES)
+    job_brief = models.TextField(blank=True)
+    responsibilities = models.TextField(blank=True)
+    skills = models.TextField(blank=True)
+    job_category = models.CharField(max_length=30, choices=JobCategories.choices)
     job_title = models.TextField()
     job_location = models.CharField(max_length=30)
-    employment_type = models.CharField(max_length=30, choices=EMLOYMENT_CHOICES)
-    organizaton = models.CharField(max_length=40)
+    employment_type = models.CharField(max_length=30, choices=EmployementTypes.choices)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     mandatory_qualification = models.CharField(max_length=40)
     optional_qualification = models.CharField(max_length=40)
     experience = models.IntegerField(default=0)
-    what_is_expected = models.CharField(max_length=10)
-    what_we_offer = models.CharField(max_length=10)
+    
 
     def __str__(self):
         return self.job_title 
@@ -70,18 +69,21 @@ class JobDescription(models.Model):
             ('read_item','Can read item'),
         )
 
-class JobApplicant(models.Model):
-    STATUS_CHOICES = (
-        ('pending','Pending'),
-        ('in_progress','In_progress'),
-        ('selected', 'Selected'),
-        ('rejected','Rejected'),
-    )
+class JobApplication(models.Model):
+    
+    class StatusType(models.TextChoices):
+        pending='pending',_('Pending'),
+        in_progress='in_progress',_('In progress'),
+        selected='selected',_('Selected'),
+        rejected='rejected',_('Rejected'),
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_description = models.ForeignKey(JobDescription, on_delete=models.CASCADE)
-    resume = models.FileField()
+    resume = models.FileField(upload_to='Documents/') 
     notice_period = models.IntegerField()
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=20, choices=StatusType.choices, default=StatusType.pending)
 
-    def __str__(self):
-        return self.user
+  
+
+
+

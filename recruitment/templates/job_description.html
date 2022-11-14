@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+            font-size: 20px;
+        }
+    </style>
+   
+</head>
+
+<body >
+    {%block title%}
+    <h1 style="text-decoration: underline; color: rgb(8, 3, 54);">Job Description</h1>
+    {%endblock%}
+
+    {%block content%}
+    {% for jd in jds %}
+    <div class="col-md-6">
+        <span class="ml-3 mt-3">
+            <div>
+                <label style="color: rgb(10, 32, 90);"> <b>Job Brief: </b></label><br>
+                {{jd.job_brief}}
+            </div>
+            <br>
+            <div>
+                <label style="color: rgb(10, 32, 90);"> <b>Responsibilities: </b></label>
+                {{jd.responsibilities | linebreaks}}
+            </div>
+            
+            <div>
+                <label style="color: rgb(10, 32, 90);"> <b>Requirements and Skills: </b></label>
+                {{jd.skills | linebreaks}}
+            </div>
+            
+            <div>
+                <label style="color: rgb(10, 32, 90);"> <b> Educational-qualifications: </b></label>
+                <ul>
+                    <li>{{jd.mandatory_qualification}} (Required)</li>
+                    <li>{{jd.optional_qualification}}</li>
+                </ul>
+            </div>
+        </span>
+    </div>
+    <a href="{% url 'apply' jd.id %}"><button type="submit" style="cursor: pointer; background: rgb(10, 32, 90); color: white;">
+            <h4>Apply for job</h4>
+        </button>
+    </a>
+    {%endfor%}
+    {%endblock%}
+
+</body>
+
+</html>
